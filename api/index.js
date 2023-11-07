@@ -4,6 +4,8 @@ const app = express()
 import cors from 'cors';
 import 'dotenv/config'
 const port = 3000
+//import path from 'path';
+//const octocatImage = path.join(process.cwd(), 'files', 'octocat.png');
 
 
 import OpenAI, { toFile } from 'openai';
@@ -28,7 +30,7 @@ const secretKey = process.env.AUTH_KEY ||  "test123"
 
 app.get('/api/octocat', async (req, res) => {
     const imageEdit = await openai.images.edit({
-        image: fs.createReadStream('public/octocat.png'),
+        image: fs.createReadStream("octocat.png"),
         prompt: req.query.prompt,
         n: 1,
         size:'1024x1024',
