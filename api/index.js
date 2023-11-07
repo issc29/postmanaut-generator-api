@@ -8,8 +8,6 @@ import path from 'path';
 //const octocatImage = path.join(process.cwd(), 'files', 'octocat.png');
 const dir = path.resolve('public/octocat.png')
 
-export const maxDuration = 45
-
 
 import OpenAI, { toFile } from 'openai';
 import fs from 'fs';
