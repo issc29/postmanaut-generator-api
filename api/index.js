@@ -26,7 +26,7 @@ const secretKey = process.env.AUTH_KEY ||  "test123"
 
 
 
-app.get('/octocat', async (req, res) => {
+app.get('/api/octocat', async (req, res) => {
     const imageEdit = await openai.images.edit({
         image: fs.createReadStream('octocat.png'),
         prompt: req.query.prompt,
@@ -38,16 +38,16 @@ app.get('/octocat', async (req, res) => {
 })
 
 
-app.get('/apiurl', async (req, res) => {
+app.get('/api/apiurl', async (req, res) => {
   res.send({ "url": apiURL })
 })
 
-app.get('/status', async (req, res) => {
+app.get('/api/status', async (req, res) => {
     res.send({ "status": "ok" })
   })
 
 
-app.post('/apiurl', async (req, res) => {
+app.post('/api/apiurl', async (req, res) => {
     if(req.token == secretKey) {
         apiURL = req.body.url
         res.send({ "url": apiURL })
