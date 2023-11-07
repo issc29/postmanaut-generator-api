@@ -28,7 +28,7 @@ const secretKey = process.env.AUTH_KEY ||  "test123"
 
 app.get('/api/octocat', async (req, res) => {
     const imageEdit = await openai.images.edit({
-        image: fs.createReadStream('octocat.png'),
+        image: fs.createReadStream('public/octocat.png'),
         prompt: req.query.prompt,
         n: 1,
         size:'1024x1024',
