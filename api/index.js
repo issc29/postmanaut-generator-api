@@ -3,7 +3,7 @@ import bearerToken from 'express-bearer-token';
 const app = express()
 import cors from 'cors';
 import 'dotenv/config'
-const port = 3000
+const port = process.env.PORT || 3000
 import path from 'path';
 //const octocatImage = path.join(process.cwd(), 'files', 'octocat.png');
 const dir = path.resolve('public/octocat.png')
