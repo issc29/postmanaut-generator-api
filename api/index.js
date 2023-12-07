@@ -5,14 +5,12 @@ import cors from 'cors';
 import 'dotenv/config'
 const port = process.env.PORT || 3000
 import path from 'path';
-//const octocatImage = path.join(process.cwd(), 'files', 'octocat.png');
-const dir = path.resolve('public/octocat.png')
-
+const postmanaut = path.resolve('public/postmanaut.png')
+const postmanautTrans = path.resolve('public/postmanaut-transparent.png')
 
 import OpenAI, { toFile } from 'openai';
 import fs from 'fs';
 
-const openai = new OpenAI();
 
 var apiURL = "http://localhost:3000"
 
@@ -29,15 +27,23 @@ const secretKey = process.env.AUTH_KEY ||  "test123"
 
 
 
-app.get('/api/octocat', async (req, res) => {
-    const imageEdit = await openai.images.edit({
-        image: fs.createReadStream(dir),
-        prompt: req.query.prompt,
-        n: 1,
-        size:'1024x1024',
-        response_format: 'b64_json'
-    })
-  res.send(imageEdit)
+app.post('/api/postmanaut', async (req, res) => {
+  try {
+    const openai = new OpenAI({
+      apiKey: req.token, 
+    });
+      const imageEdit = await openai.images.edit({
+          image: fs.createReadStream(postmanaut),
+          mask: fs.createReadStream(postmanautTrans),
+          prompt: req.body.prompt,
+          n: 1,
+          size:'1024x1024',
+          response_format: 'b64_json'
+      })
+    res.send(imageEdit)
+  } catch(e) {
+    res.status(401).send({ error: 'Unauthorized' })
+  }
 })
 
 
