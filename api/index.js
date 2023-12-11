@@ -40,7 +40,9 @@ app.post('/api/postmanaut', async (req, res) => {
           size:'1024x1024',
           response_format: 'b64_json'
       })
-    res.send(imageEdit)
+
+    const b64json = imageEdit.data[0].b64_json
+    res.send({data: b64json})
   } catch(e) {
     res.status(401).send({ error: 'Unauthorized' })
   }
